@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SkoopiaApi</name>
+    </assembly>
+    <members>
+        <member name="T:SkoopiaApi.Skoopia.SkoopiaApiCalledEventHandler">
+            <summary>
+            This event is called every time the skoopia api is used
+            </summary>
+            <param name="call">The Api call that has been used</param>
+            <param name="response">The response the camera gave to the response</param>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.ApiCallSetParameter(System.String,SkoopiaApi.SkoopiaApiCall,System.String)">
+            <summary>
+            Sets a prameter based on the internal dictionary, should normally not be called from outside this class
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="function">The Name of the dictionary feature</param>
+            <param name="parameter">The parameter you want to set the feature to</param>
+            <returns></returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.ApiCallGetParameter(System.String,SkoopiaApi.SkoopiaApiCall)">
+            <summary>
+            Gets a prameter based on the internal dictionary, should normally not be called from outside this class
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="function">The Name of the dictionary feature</param>
+            <returns></returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.HTTPRequest(System.String,System.String)">
+            <summary>
+            Calls a webpage and presents its contat as a string
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="url">The page you want to load</param>
+            <returns></returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.SetCameraFocus(System.String,SkoopiaApi.Skoopia.Focus)">
+            <summary>
+            Increase or decreases the focus by one step. Using pushaf will focus on a logical target once
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="focusType">Eighter far_step, near_step or pushaf</param>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.SetCameraZoom(System.String,System.Int32)">
+            <summary>
+            Sets the current Zoom of the Motorzoom camera. Values 1-99
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns></returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetCameraZoom(System.String)">
+            <summary>
+            Returns the current Zoom of the Motorzoom camera. Values 1-99
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns></returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.SetRTPStream(System.String,System.Boolean)">
+            <summary>
+            Enables or disables the RTP Stream on the camera
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="value">Eighter On or Off</param>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetRTPStream(System.String)">
+            <summary>
+            Returns the current state of the RTP Stream
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>Eigther On or Off</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetBrightness(System.String)">
+            <summary>
+            Returns the current brightness value
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>Eigther On or Off</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.SetBrightness(System.String,System.Int32)">
+            <summary>
+            Sets the current brightnessvalue on the camera on the camera
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="value">Eighter On or Off</param>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetResolution(System.String)">
+            <summary>
+            Returns the current brightness value
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>Eigther On or Off</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.SetResolution(System.String,SkoopiaApi.Skoopia.StreamResoultion)">
+            <summary>
+            Sets the current brightnessvalue on the camera on the camera
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="resolution">Enum of type Resolution</param>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.StopZoom(System.String)">
+            <summary>
+            Stops the zooming of the camera
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetRTPStreamDestinationIP(System.String)">
+            <summary>
+            Returns the destination IP of the RTP Stream
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>Destination IP of the RTP Stream</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetRTPStreamDestinationPort(System.String)">
+            <summary>
+            Returns the destination Port of the RTP Stream
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>Destination Port of the RTP Stream</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetVideoQuality(System.String)">
+            <summary>
+            returns the Videoquality configured for the camera.
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.SetCameraAutoFocus(System.String,System.Boolean)">
+            <summary>
+            Enables or disables the auto focus of the camera
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="value">Eigther On or Off</param>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetCameraAutoFocus(System.String)">
+            <summary>
+            Gets the current state of the autofocus
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>Eigther Auto=true or Manual=false</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.SetCameraHeater(System.String,SkoopiaApi.Heater)">
+            <summary>
+            Untested fucntion should turn the heater On or Off
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <param name="value">The mode the heater should be set to</param>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.extractParam(System.String,System.String)">
+            <summary>
+            Extracts a paramerter from a response
+            </summary>
+            <param name="param">the param you want to extract</param>
+            <param name="networkResponse">The response to extract the parameter from</param>
+            <returns></returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetCameraName(System.String)">
+            <summary>
+            Gets the cameras Name stored in the config.txt
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>The cameras Name</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetCameraMacAddress(System.String)">
+            <summary>
+            Gets the cameras Mac Addes stored in the config.txt
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>The cameras Mac Address</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetCameraModel(System.String)">
+            <summary>
+            Gets the cameras Model stored in the config.txt
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>The cameras Model</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetCameraFirmware(System.String)">
+            <summary>
+            Gets the cameras Firmware stored in the config.txt
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>The cameras firmware</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetCameraVersion(System.String)">
+            <summary>
+            Gets the cameras Version stored in the config.txt
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>The cameras Version</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetCameraPlatform(System.String)">
+            <summary>
+            Gets the cameras platform stored in the config.txt
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>The cameras platform</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.GetConfigTxt(System.String)">
+            <summary>
+            Loads the cameras config.txt file
+            </summary>
+            <param name="ip">Motorzoom Camera IP</param>
+            <returns>The content of the config.txt file as string</returns>
+        </member>
+        <member name="M:SkoopiaApi.Skoopia.getSetupFile(System.String)">
+            <summary>
+            Gets the current current Setup from the camera
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SkoopiaApi.SkoopiaApiCall">
+            <summary>
+            Used to store api calls in a dictionariy
+            </summary>
+        </member>
+    </members>
+</doc>

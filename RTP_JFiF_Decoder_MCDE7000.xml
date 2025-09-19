@@ -1,0 +1,511 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RTP_JFiF_Decoder_MCDE7000</name>
+    </assembly>
+    <members>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder">
+            <summary>
+            RTP Decoder class used to render frames comming from the MCDxX000 cameras. Offering MVVM, event based and Function Based live image access with minimal CPU impact
+            </summary>
+        </member>
+        <member name="E:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.OnImageReceive">
+            <summary>
+            This event is fired when an image was received
+            </summary>
+        </member>
+        <member name="E:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.OnImageSaved">
+            <summary>
+            This event is fired when an image was received
+            </summary>
+        </member>
+        <member name="E:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.OnFramerateChanged">
+            <summary>
+            This event is fired when the framerate changed
+            </summary>
+        </member>
+        <member name="E:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.OnSequenceNumberMissmatch">
+            <summary>
+            This event is fired if the sequence numbers did not match, used for camera supervision
+            </summary>
+        </member>
+        <member name="E:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.OnTimeout">
+            <summary>
+            This event is fired if the stream times out
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Frame">
+            <summary>
+            This will contain a RTP frame structure similar to the one seen in wireshark		
+            </summary>
+        </member>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.ImageReceivedEventHandler">
+            <summary>
+            This event is fired when an image was received
+            </summary>
+        </member>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.FrameRateChangedEventHandler">
+            <summary>
+            This event is fired when an image was received
+            </summary>
+        </member>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.ImageSavedEventHandler">
+            <summary>
+            This event is fired when an image was received
+            </summary>
+        </member>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.SequenceNumberMissmatchEventHandler">
+            <summary>
+            This event is fired if the sequence numbers did not match, used for camera supervision
+            </summary>
+        </member>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.StreamTimedOutEventHandler">
+            <summary>
+            This event is fired if the stream times out
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Version">
+            <summary>
+            Returns the version of this DLL
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.#ctor(System.Int32,System.Int32,System.Net.IPAddress)">
+            <summary>
+            Creates an instance of a RTP decoder tested with MJPEG on the MCDB7000 and starts the stream
+            </summary>
+            <param name="port">The port it will receive the frames on</param>
+            <param name="timeout">The time interval it is waiting for the next UDP packet / frame</param>
+            <param name="destinationIp">the IP the camera is streaming to, this value is not needed unless you are using multicast and need to join the multicast group</param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates an instance of a RTP decoder tested with MJPEG on the MCDB7000 and starts the stream
+            </summary>
+            <param name="port">The port it will receive the frames on</param>
+            <param name="timeout">The time interval it is waiting for the next UDP packet / frame</param>
+            <param name="destinationIp">the IP the camera is streaming to, this value is not needed unless you are using multicast and need to join the multicast group</param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.#ctor(System.Int32,System.Int32,System.Net.IPAddress,System.Net.IPAddress)">
+            <summary>
+            Creates an instance of a RTP decoder tested with MJPEG on the MCDB7000 and starts the stream
+            </summary>
+            <param name="port">The port it will receive the frames on</param>
+            <param name="timeout">The time interval it is waiting for the next UDP packet / frame</param>
+            <param name="destinationIp">the IP the camera is streaming to, this value is not needed unless you are using multicast and need to join the multicast group</param>
+            <param name="localAddress">The IPAddress you expect the stream to arrive on, used for multicast</param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.#ctor(System.Int32)">
+            <summary>
+            do not use this constructer, it is old...
+            </summary>
+            <param name="port"></param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.isIpMulticast(System.Net.IPAddress)">
+            <summary>
+            Determines if a IPv4 address is in the multicast range
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.PlayPause">
+            <summary>
+            Toggles the current play state from stopped to playing or vise versa
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Start">
+            <summary>
+            Starts the RTP frame decoding. You can get the latest frames using the OnImageReceived event or by Binding to ImageLive
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.pause">
+            <summary>
+            Pauses the decoding
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.resume">
+            <summary>
+            COntinues the decoding
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.GetLiveImageAsBitmapImage(System.Boolean@)">
+            <summary>
+            Returns a Bitmap that is the LiveImage
+            </summary>
+            <param name="success">Indicates if a live image cold be obtained</param>
+            <returns></returns>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.GetLiveImageAsByteArray(System.Boolean@)">
+            <summary>
+            Returns a byte[] that is the LiveImage
+            </summary>
+            <param name="success">Indicates if a live image could be obtained</param>
+            <returns></returns>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.getLiveImageAsBitmapSource(System.Boolean@)">
+            <summary>
+            Returns a BitmapSource that is the LiveImage
+            </summary>
+            <param name="success">Indicates if a live image cold be obtained</param>
+            <returns></returns>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.GetBitmap_PixelFormat(System.Windows.Media.Imaging.BitmapSource,System.Drawing.Imaging.PixelFormat)">
+            <summary>
+            Converts a Bitmapsource to a bitmap in the provided pixelformat
+            </summary>
+            <param name="source">the bitmap source you want to convert</param>
+            <param name="format">the format you want to convert it to</param>
+            <returns></returns>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.insertImageWidthInJpegHeader">
+            <summary>
+            Inserts the Height and Width out of the RTP frame into the default header
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.StartFpsTimer">
+            <summary>
+            Starts the FPS timer that will reset the frame counter every second. This is used to determine the rendering framerate
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.fpsTimerElpased(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Resets the Framecounter
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Stop">
+            <summary>
+            Will stop the udp client from receiving  the frames and resets the variables used to a initial value
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.SaveNextImage(System.String)">
+            <summary>
+            Will set a marker that causes the next frame to be saved
+            </summary>
+            <param name="path">The path including the filename and extension where you want to store your image</param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.saveStream(System.IO.Stream)">
+            <summary>
+            takes a stream and writes it to a file specified in saveImagePath
+            </summary>
+            <param name="stream">the stream we want to save</param>
+            <returns></returns>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.IsStopped">
+            <summary>
+            Indicates if the stream is stopped or Running
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.EnableImageFreezeDetection">
+            <summary>
+            Indicates if the consequent frames are compared for freezedetection or not
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.LiveImage">
+            <summary>
+            Used to bind to the Liveimage using MVVM
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.FPS">
+            <summary>
+            The rendering framerate
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Codec">
+            <summary>
+            The rendering framerate
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.IsPortBlocked">
+            <summary>
+            Indicates if the Port is blocked.
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.ImageFrozen">
+            <summary>
+            indicates if the image is frozen
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.MBits">
+            <summary>
+            The MBit/s on the Port of the videodecoder
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.makeQuantitizationTables(System.Single,System.Boolean)">
+            <summary>
+            Creates the quantitization tables for the JPEG header. This function is directly imported from RFC 2435
+            </summary>
+            <param name="q">Quality index extracted from RTP stream</param>
+            <param name="GetLumaTable">If true will return the Luma table else will return chroma table</param>
+            <returns></returns>
+        </member>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame">
+            <summary>
+            Class used to easily decode a RTP frame similar to wireshark
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame.#ctor(System.Byte[])">
+            <summary>
+            Üass your byte array in this and you will get easy access to all the values of the RTP protokoll
+            </summary>
+            <param name="rtpFrame"></param>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame.RTPFrame">
+            <summary>
+            This will contain the byte array you initially passed nto this function
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame.Rfc2435Fragment">
+            <summary>
+            Contains a single RTP JPEG packet
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame.Marker">
+            <summary>
+            Marker indicates the End of frame
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame.PayloadType">
+            <summary>
+            the payload type indicating it is JPEG or H264
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame.SequenceNumber">
+            <summary>
+            RTP sequencenumber will increase with each poacket received
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame.TimeStamp">
+            <summary>
+            timstamp will indicate time since boot of the camera 
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.RtpFrame.SynchronisationSourceIdentifier">
+            <summary>
+            not sure what this is used for but enjoy here it is
+            </summary>
+        </member>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg">
+            <summary>
+            Contains a  RTP Jepeg fragment as seen in wireshark
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.#ctor(System.Byte[])">
+            <summary>
+            creates a new instance of this class
+            </summary>
+            <param name="rtpFrame">the byte array you want to decode</param>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.RTPFrame">
+            <summary>
+            the byte array you want to decode
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.offset">
+            <summary>
+            this value has never been used...but was ment do overcome the lack of pointers
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.TypeSpecific">
+            <summary>
+            Not sure what is does but you can work with it :)
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.FragmentOffSet">
+            <summary>
+            this indicates the offset from the start of the frame?
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.Type">
+            <summary>
+            Returns the type
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.Q">
+            <summary>
+            returns the Q value indicating the quality of the Jpeg
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.Width">
+            <summary>
+            the Jpeag Width in pixels
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.Height">
+            <summary>
+            The jpeag height in pixels
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder.Rfc2435Jpeg.Payload">
+            <summary>
+            The Jpeg payload without the header
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.BitmapSourceComparer.AreEqual(System.Windows.Media.Imaging.BitmapSource,System.Windows.Media.Imaging.BitmapSource)">
+            <summary>
+            compares every pixel of the two images
+            </summary>
+            <param name="bmp1"></param>
+            <param name="bmp2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.BitmapSourceComparer.AreVisuallyEqual(System.Windows.Media.Imaging.BitmapSource,System.Windows.Media.Imaging.BitmapSource,System.Int32)">
+            <summary>
+            compares a number of pixels in random locations
+            </summary>
+            <param name="bmp1"></param>
+            <param name="bmp2"></param>
+            <param name="sampleCount"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RTP_JFiF_Decoder_MCDE7000.Streamingbox">
+            <summary>
+            Interaktionslogik für Streamingbox.xaml
+            </summary>
+            <summary>
+            Streamingbox
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.Streamingbox.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.aviWriter">
+            <summary>
+            Writes the avi video stream
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.videoStream">
+            <summary>
+            An encoder used to reencode the bitmap in a lower resolution
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.record">
+            <summary>
+            this flag determines if the recording thread loop shall exit after the next frame
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.frameRate">
+            <summary>
+            The target framrate we want to record at
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.frameCount">
+            <summary>
+            The frame count in the current recoring
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.dvrFolder">
+            <summary>
+            the folder in which all dvr videos are stored, not used for non dvr recordings
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.isInitialized">
+            <summary>
+            indicates if the videorecorder is initialized
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.startOfRecording">
+            <summary>
+            The timestamp at which the recording was started
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.busy">
+            <summary>
+            is true while a frame is beeing reencoded and added to the avi writer, false otherwise, used to skip frames if the encoder cant keep pace
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.decoder">
+            <summary>
+            A reference to ar running rtp jfif encoder decoding a stream
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.writeLock">
+            <summary>
+            Locks objects to avoid multi thread access
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.quality">
+            <summary>
+            the quality at whichwe are recording
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.fps">
+            <summary>
+            the framerate which is passed into a new avi writer to make the videos one minute long
+            </summary>
+        </member>
+        <member name="F:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.chunkSizeInSconds">
+            <summary>
+            the amount of seconds a dvr records before creating a new file
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.IsRecording">
+            <summary>
+            Dependency property indicating if a recording is currently running
+            </summary>
+        </member>
+        <member name="P:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.DvrMode">
+            <summary>
+            If true the recording loop stops after chunkSize and starts a new recording
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.#ctor(System.Int32,System.Int32,RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder)">
+            <summary>
+            Creates a new video recorder and stores the recording parameters locally
+            </summary>
+            <param name="frameRate">The target framrate for the recording</param>
+            <param name="quality">The quality for the MJPEG recording</param>
+            <param name="decoder">The decoder that is decoding the rtp stream</param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.StartRecording(System.String)">
+            <summary>
+            Starts the recording of a file, needs to be terminated by StopRecording(), 
+            </summary>
+            <param name="fileName">The File Name Including the full file path to the avi file i.e. "C:\Recordings\Recording_1.avi". If the file already exists it will be overwritten </param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.StartDvrRecording(System.String)">
+            <summary>
+            Starts the recording in a loop
+            </summary>
+            <param name="fileName">The folder Name not including file name "C:\Recordings\" </param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.Initialize(System.String,System.Int32,System.Int32,System.Int32,System.Int32,RTP_JFiF_Decoder_MCDE7000.RTP_JFIF_Decocder)">
+            <summary>
+            Initializes the AVI writer.
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.startRecordingThread">
+            <summary>
+            Starts a new thread that adds video frames every 1000/fps ms
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.newFileName(System.String)">
+            <summary>
+            generates a new file name based of the current time
+            </summary>
+            <param name="folder">The folder in which the file is saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.StopRecording">
+            <summary>
+            stops the video recording loop by toggeling the record flag and closes the recording
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.SaveVideoFrameSafely(System.Windows.Media.Imaging.BitmapSource)">
+            <summary>
+            Adds a bitmapsource frame to the avi writer
+            </summary>
+            <param name="Image">The bitmapsource we want to store in an avi file</param>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.AddVideoFrame(System.Windows.Media.Imaging.BitmapSource)">
+            <summary>
+            Adds a video frame from BitmapSource to the video stream.
+            </summary>
+        </member>
+        <member name="M:RTP_JFiF_Decoder_MCDE7000.VideoRecorder.Close">
+            <summary>
+            Closes the video writer.
+            </summary>
+        </member>
+    </members>
+</doc>

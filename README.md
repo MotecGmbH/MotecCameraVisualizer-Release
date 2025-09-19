@@ -41,7 +41,7 @@ The **Motec Camera Visualizer** is a Windows-based application designed to displ
 
 ---
 
-## 📜 Open Source Components  
+## Open Source Components  
 
 - [AForge.NET v2.2.5](https://www.aforgenet.com/framework/) – LGPL v3  
 - [ZXing.NET v0.16.9](https://github.com/micjahn/ZXing.Net/) – Apache 2.0  
